@@ -4,7 +4,7 @@ import (
 	swordplay "Swordplay"
 	"github.com/ebitengine/oto/v3"
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/audio/wav"
+	"github.com/hajimehoshi/ebiten/v2/audio/vorbis"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"log"
 	"time"
@@ -30,13 +30,13 @@ func main() {
 	ebiten.SetWindowResizingMode(ebiten.WindowResizingModeEnabled)
 
 	go func() {
-		file, err := swordplay.Sounds.Open("music/menu.wav")
+		file, err := swordplay.Sounds.Open("music/menu.ogg")
 
 		if err != nil {
 			panic(err)
 		}
 
-		decodedWav, err := wav.DecodeWithoutResampling(file)
+		decodedOgg, err := vorbis.DecodeF32(file)
 
 		if err != nil {
 			panic("could not decode file")
@@ -48,13 +48,13 @@ func main() {
 
 		op.ChannelCount = 2
 
-		op.Format = oto.FormatSignedInt16LE
+		op.Format = oto.FormatFloat32LE
 
 		otoCtx, readyChan, err := oto.NewContext(op)
 
 		<-readyChan
 
-		player := otoCtx.NewPlayer(decodedWav)
+		player := otoCtx.NewPlayer(decodedOgg)
 
 		player.Play()
 

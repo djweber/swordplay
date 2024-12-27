@@ -1,6 +1,10 @@
 package swordplay
 
-import "embed"
+import (
+	"embed"
+	"io/fs"
+)
 
-//go:embed assets
-var Assets embed.FS
+//go:embed assets/sounds
+var soundFs embed.FS
+var Sounds, _ = fs.Sub(soundFs, "assets/sounds")

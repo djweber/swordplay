@@ -1,8 +1,7 @@
 package main
 
 import (
-	"embed"
-	_ "embed"
+	swordplay "Swordplay"
 	"github.com/ebitengine/oto/v3"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/audio/wav"
@@ -31,7 +30,7 @@ func main() {
 	ebiten.SetWindowResizingMode(ebiten.WindowResizingModeEnabled)
 
 	go func() {
-		file, err := f.Open("assets/sound/music/main.wav")
+		file, err := swordplay.Sounds.Open("music/menu.wav")
 
 		if err != nil {
 			panic(err)

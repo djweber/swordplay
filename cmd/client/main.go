@@ -11,9 +11,6 @@ import (
 	"time"
 )
 
-//go:embed "assets"
-var f embed.FS
-
 type Game struct{}
 
 func (g Game) Update() error {

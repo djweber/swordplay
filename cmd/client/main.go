@@ -1,7 +1,7 @@
 package main
 
 import (
-	swordplay "Swordplay"
+	"Swordplay/assets"
 	"github.com/ebitengine/oto/v3"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/audio/vorbis"
@@ -15,7 +15,7 @@ func main() {
 	ebiten.SetWindowResizingMode(ebiten.WindowResizingModeEnabled)
 
 	go func() {
-		file, err := swordplay.Sounds.Open("music/menu.ogg")
+		file, err := assets.Sounds.Open("music/menu.ogg")
 
 		if err != nil {
 			panic(err)
@@ -50,7 +50,7 @@ func main() {
 		file.Close()
 	}()
 
-	game := swordplay.NewGame()
+	game := NewGame()
 
 	if err := ebiten.RunGame(&game); err != nil {
 		log.Fatal(err)

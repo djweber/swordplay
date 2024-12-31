@@ -5,6 +5,7 @@ import (
 	"github.com/ebitengine/oto/v3"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/audio/vorbis"
+	"io"
 	"log"
 	"time"
 )
@@ -46,6 +47,13 @@ func main() {
 		for player.IsPlaying() {
 			time.Sleep(time.Millisecond)
 		}
+
+		newPos, err := player.Seek(0, io.SeekStart)
+		if err != nil {
+			panic("player.Seek failed: " + err.Error())
+		}
+		println("Player is now at position:", newPos)
+		player.Play()
 
 		file.Close()
 	}()

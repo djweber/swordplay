@@ -1,3 +1,6 @@
 package component
 
-type Position struct{}
+type Position struct {
+	x int
+	y int
+}
